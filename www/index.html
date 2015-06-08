@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>AmiciCalendar</title>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />       
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="Stylesheet" href="css/fullcalendar.css">	
+        <link rel="Stylesheet" href="css/fullcalendar.min.css">		
+	     <link rel="stylesheet" href="js/cupertino/jquery-ui.min.css">
+	     <link rel="stylesheet" href="css/fullcalendar.print.css"  media="print">
+          <script src="js/jquery.min.js"></script>
+		<script src="js/jquery-ui.custom.min.js"></script>
+		<script src="js/moment.min.js"></script>
+		<script src="js/fullcalendar.min.js"></script>
+		<script src="js/fullcalendar.js"></script>		
+		<script src="js/gcal.js"></script>		
+		<script src="lang/es.js"></script>
+          <script>
+          $(document).ready(function(){
+				$("#fondo").hide()
+				$("#modal").hide();
+				$("#crearevento").hide();
+				$(".articulos").hide();
+				$("#buscador").hide();
+				$(".calendario article").click(function(){
+					$("#fondo").fadeIn("slow")
+					$("#modal").fadeIn("slow");
+					$("#modal").html("Nombre del evento: "+$(this).attr("nombre"))
+				})
+				$("#boton1").click(function(){
+					$(section).load("http://www.estelapascual.es/ejercicios/appcalendario/index.php")
+				});
+				$("#boton2").click(function(){
+					$(".calendario").fadeOut("fast");
+					$(".boton").fadeOut("fast");
+					$("#crearevento").fadeOut("fast");					
+					$(".articulos").fadeIn("slow");
+					$("#buscador").fadeOut("fast");	
+				});			
+				$("#boton3").click(function(){
+					$(".calendario").fadeIn("slow");
+					$(".boton").fadeIn("slow");					
+					$(".articulos").fadeOut("fast");
+					$("#crearevento").fadeOut("fast");
+					$("#buscador").fadeOut("fast");						
+				});
+				$("#boton4").click(function(){
+					$(".calendario").fadeOut("fast");
+					$(".boton").fadeOut("fast");					
+					$(".articulos").fadeOut("fast");
+					$("#crearevento").fadeIn("slow");
+					$("#buscador").fadeOut("fast");										
+				});
+				$("#boton5").click(function(){
+					$(".calendario").fadeOut("fast");
+					$(".boton").fadeOut("fast");					
+					$(".articulos").fadeOut("fast");
+					$("#crearevento").fadeOut("fast");
+					$("#buscador").fadeIn("slow");									
+				});
+				
+				$('#calendar').fullCalendar({
+			          theme: true,
+			          header: {
+				          left: 'prev,next today',
+				          center: 'title',
+				          right: 'month,agendaWeek,agendaDay'
+			          },
+			          defaultDate: '2015-02-12',
+			          editable: true,
+			          eventLimit: true, // allow "more" link when too many events
+			          events: [
+				          {
+					          title: 'All Day Event',
+					          start: '2015-02-01'
+				          },
+				          {
+					          title: 'Long Event',
+					          start: '2015-02-07',
+					          end: '2015-02-10'
+				          },
+				          {
+					          id: 999,
+					          title: 'Repeating Event',
+					          start: '2015-02-09T16:00:00'
+				          },
+				          {
+					          id: 999,
+					          title: 'Repeating Event',
+					          start: '2015-02-16T16:00:00'
+				          },
+				          {
+					          title: 'Conference',
+					          start: '2015-02-11',
+					          end: '2015-02-13'
+				          },
+				          {
+					          title: 'Meeting',
+					          start: '2015-02-12T10:30:00',
+					          end: '2015-02-12T12:30:00'
+				          },
+				          {
+					          title: 'Lunch',
+					          start: '2015-02-12T12:00:00'
+				          },
+				          {
+					          title: 'Meeting',
+					          start: '2015-02-12T14:30:00'
+				          },
+				          {
+					          title: 'Happy Hour',
+					          start: '2015-02-12T17:30:00'
+				          },
+				          {
+					          title: 'Dinner',
+					          start: '2015-02-12T20:00:00'
+				          },
+				          {
+					          title: 'Birthday Party',
+					          start: '2015-02-13T07:00:00'
+				          },
+				          {
+					          title: 'Click for Google',
+					          url: 'http://google.com/',
+					          start: '2015-02-28'
+				          }
+			          ]
+		          });
+			})
+          </script>
+        
+    </head>
+    <body>
+          <header>
+            <h1>AmiciCalendar</h1>
+            <h2>Calendario de eventos sociales</h2>
+          </header>
+            <main>
+			<section>
+				<a href="http://www.estelapascual.es/ejercicios/appcalendario/entrar.php"><button class="botonarriba" id="boton1">Salir</button></a>
+				<button class="botonarriba" id="boton2">Eventos en Lista</button>
+				<button class="botonarriba" id="boton3">Calendario</button>
+				<button class="botonarriba" id="boton4">Crear Evento</button>
+				<button class="botonarriba" id="boton5">Buscar Amigos</button>
+				<h3></h3>		
+				<div id="calendar" class="calendario">				
+				</div>									
+				<div id="crearevento">
+				<h4>Crear un evento nuevo</h4><br>
+				<form action="crearevento.php" method="POST">
+					<td><input type="text" name="nombre" placeholder="Nombre del evento"><br></td>
+					<td><input type="date" name="fechainicio" placeholder="Fecha de inicio"><br></td>
+					<td><input type="date" name="fechafinal" placeholder="Fecha final"><br></td>					
+					<td><input type="number" name="duracion" placeholder="Tiempo de duración del evento"><br></td>
+					<td><input type="text" name="localizacion" placeholder="Donde es el evento"><br></td>					
+					<td><select name="FK_categorias_categoria">
+						
+					</select><br></td>
+					<td><select name="FK_estados_estado">
+						
+					</select><br></td>
+					<td><input type="submit"></td>
+				</form></div>   
+				 
+				<div id="buscador">
+				<h4>Busca a tus amigos</h4><br>
+				<form action="buscar.php" method="POST">
+					<input type="text" id="busqueda" name="termino" placeholder="Busca a tus amigos por el nombre de usuario">
+					<input type="submit">
+				</form>
+				<div id="resultado"></div>
+				</div>	
+			</section>
+		</main>
+    </body>
+</html>
